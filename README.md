@@ -6,9 +6,14 @@ A lightweight, native macOS app for managing and launching scripts across differ
 
 Script Launcher helps developers and AI assistants manage project-specific scripts efficiently. Each script appears with its emoji icon, name, and description in a clean macOS interface.
 
-## Latest Version: 2.3
+## Latest Version: 2.5
 
-### What's New
+### What's New in 2.5
+- **Copy Output Button** - New clipboard button to copy script output
+- **Fixed npm/node PATH** - Scripts now run with proper PATH environment for npm, node, and other tools
+- **Login Shell** - Uses bash login shell to load user's full environment
+
+### Previous Features (2.3)
 - **Run Buttons** - Each script has a dedicated Run button (no accidental execution)
 - **Better Project Display** - Shows project names in title bar and under Scripts header
 - **Improved Recent Projects** - Shows "ProjectName — ParentFolder" for clarity

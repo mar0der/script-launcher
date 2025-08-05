@@ -46,9 +46,9 @@ cat > "$APP_NAME.app/Contents/Info.plist" << EOF
     <key>CFBundleDisplayName</key>
     <string>Script Launcher</string>
     <key>CFBundleVersion</key>
-    <string>2.3</string>
+    <string>2.5</string>
     <key>CFBundleShortVersionString</key>
-    <string>2.3</string>
+    <string>2.5</string>
     <key>LSMinimumSystemVersion</key>
     <string>11.0</string>
     <key>CFBundlePackageType</key>

@@ -217,13 +217,29 @@ class AppState: ObservableObject {
     func executeScript(_ script: Script) async {
         let task = Process()
         task.launchPath = "/bin/bash"
-        task.arguments = ["-c", script.path]
+        task.arguments = ["-l", "-c", script.path]  // -l flag loads login shell with full PATH
         
         if let workingDir = script.workingDirectory {
             task.currentDirectoryPath = workingDir
         } else if let projectPath = currentProjectPath {
             task.currentDirectoryPath = URL(fileURLWithPath: projectPath).deletingLastPathComponent().path
         }
+        
+        // Set up environment with proper PATH
+        var environment = ProcessInfo.processInfo.environment
+        // Add common paths for npm/node installations
+        let additionalPaths = [
+            "/usr/local/bin",
+            "/opt/homebrew/bin",
+            "/opt/homebrew/sbin",
+            "$HOME/.nvm/versions/node/*/bin"
+        ]
+        if let currentPath = environment["PATH"] {
+            environment["PATH"] = additionalPaths.joined(separator: ":") + ":" + currentPath
+        } else {
+            environment["PATH"] = additionalPaths.joined(separator: ":") + ":/usr/bin:/bin:/usr/sbin:/sbin"
+        }
+        task.environment = environment
         
         let pipe = Pipe()
         task.standardOutput = pipe
@@ -405,6 +421,15 @@ struct ContentView: View {
                         ProgressView()
                             .scaleEffect(0.7)
                     }
+                    Button(action: {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(appState.lastOutput, forType: .string)
+                    }) {
+                        Image(systemName: "doc.on.clipboard")
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                    .help("Copy output to clipboard")
+                    .disabled(appState.lastOutput.isEmpty)
                     Button(action: { appState.lastOutput = "" }) {
                         Image(systemName: "clear")
                     }

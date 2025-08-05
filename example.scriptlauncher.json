@@ -1,0 +1,52 @@
+{
+  "scripts": [
+    {
+      "name": "Deploy to Production",
+      "icon": "🚀",
+      "path": "./scripts/deploy-prod.sh",
+      "description": "Full production deployment with rollback support"
+    },
+    {
+      "name": "Run All Tests",
+      "icon": "🧪",
+      "path": "npm test -- --coverage --watchAll=false",
+      "description": "Runs unit, integration, and e2e tests with coverage"
+    },
+    {
+      "name": "Build for Release",
+      "icon": "🔨",
+      "path": "npm run build && npm run optimize",
+      "description": "Production build with optimizations"
+    },
+    {
+      "name": "Database Migration",
+      "icon": "🗄️",
+      "path": "npm run migrate:latest && npm run seed:prod",
+      "description": "Apply latest migrations and seed production data"
+    },
+    {
+      "name": "Clean Install",
+      "icon": "🧹",
+      "path": "rm -rf node_modules package-lock.json && npm install",
+      "description": "Clean reinstall of all dependencies"
+    },
+    {
+      "name": "Start Dev Server",
+      "icon": "💻",
+      "path": "npm run dev",
+      "description": "Start development server with hot reload"
+    },
+    {
+      "name": "Generate API Docs",
+      "icon": "📚",
+      "path": "./scripts/generate-docs.sh",
+      "description": "Generate API documentation from code comments"
+    },
+    {
+      "name": "Security Audit",
+      "icon": "🔒",
+      "path": "npm audit && npm outdated",
+      "description": "Check for security vulnerabilities and outdated packages"
+    }
+  ]
+}
